@@ -7,7 +7,7 @@ const Header = () => {
 
   return (
     <header className="h-15 border-b-gray-950">
-      <nav className="flex justify-between items-center px-5 py-5">
+      <nav className="flex justify-between items-center px-5 py-5 ">
         {/* 로고 */}
         <Link href="/">
           <span className="text-[30px] font-bold cursor-pointer">Health-Life</span>
