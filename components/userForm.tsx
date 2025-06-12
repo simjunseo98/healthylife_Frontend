@@ -18,12 +18,12 @@ const UserForm =({
 }: userFormProps): JSX.Element => {
     return (
     <div className='flex flex-col w-full max-w-[600px]  h-[600px] p-4 rounded-md '>
-      <h2 className='text-center text-5xl font-semibold mb-4'>{title}</h2>
+      <h2 className='text-center text-7xl font-semibold mb-13 text-emerald-700'>{title}</h2>
       <form onSubmit={onSubmit} className='space-y-6  flex flex-col flex-1'>
        {children}
         <button
           type='submit'
-          className='w-full h-auto bg-gray-700 text-white py-4 rounded-md cursor-pointer hover:bg-black'
+          className='w-full h-auto  text-white py-4 rounded-md cursor-pointer bg-emerald-500 hover:bg-sky-400'
         >
           {submitText}
         </button>

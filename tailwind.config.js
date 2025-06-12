@@ -1,11 +1,18 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}"
-  ],
-  theme: {
-    extend: {},
+export const content = [
+  "./pages/**/*.{js,ts,jsx,tsx}",
+  "./components/**/*.{js,ts,jsx,tsx}"
+];
+export const theme = {
+  extend: {
+    animation: {
+      'spin-slow': 'spin 20s linear infinite',
+    },
+    colors: {
+      mint: '#8FE3CF',
+      coral: '#FF9E9E',
+      skysoft: '#A3D5FF',
+    },
   },
-  plugins: [require('@tailwindcss/aspect-ratio')],
 };
+export const plugins = [require('@tailwindcss/aspect-ratio')];

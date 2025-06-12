@@ -9,7 +9,7 @@ const Signup = () => {
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const [password2, setPassword2] = useState('')
   const [error, setError] = useState('')
   const router = useRouter()
 
@@ -18,28 +18,26 @@ const Signup = () => {
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError('')
-
-    if (password !== confirmPassword) {
+    if (password != password2) {
       setError('비밀번호가 일치하지 않습니다.')
       return
     }
-
     try {
-      await signup(email, password, username)
-      router.push('/user/login')
+      await signup(email, username, password, password2)
+      router.push('/users/login')
     } catch (err: any) {
       setError(err.message)
     }
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4">
+    <main className="min-h-screen flex items-center justify-center px-4 mt-12">
       <UserForm
         title="Sign-up"
         submitText="회원가입"
         onSubmit={handleSignup}
         bottomText={
-          <Link href="/user/login" className="text-blue-500 hover:underline block mt-2">
+          <Link href="/users/login" className="text-blue-500 hover:underline block mt-2">
             이미 계정이 있으신가요? 로그인
           </Link>
         }
@@ -55,7 +53,7 @@ const Signup = () => {
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
           required
-          className="w-full px-4 py-2 border rounded-md"
+          className="w-full px-4 py-4 border rounded-md"
         />
         <input
           type="email"
@@ -63,7 +61,7 @@ const Signup = () => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           required
-          className="w-full px-4 py-2 border rounded-md"
+          className="w-full px-4 py-4 border rounded-md"
         />
         <input
           type="password"
@@ -71,15 +69,15 @@ const Signup = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           required
-          className="w-full px-4 py-2 border rounded-md"
+          className="w-full px-4 py-4 border rounded-md"
         />
         <input
           type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          value={password2}
+          onChange={(e) => setPassword2(e.target.value)}
           placeholder="Confirm Password"
           required
-          className="w-full px-4 py-2 border rounded-md"
+          className="w-full px-4 py-4 border rounded-md"
         />
       </UserForm>
     </main>
