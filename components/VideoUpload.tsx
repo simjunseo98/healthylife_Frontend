@@ -78,7 +78,7 @@ const VideoUpload: FC<VideoUploadProps> = (): JSX.Element => {
     try {
       setIsUploading(true)
       console.log('⏳ 서버로 업로드 요청 시작')
-      const res = await fetch('http://13.125.241.160:8000/videos/upload/', {
+      const res = await fetch('http://127.0.0.1:8000/videos/upload/', {
         method: 'POST',
         headers: {
           'Authorization': `Token ${token}`
@@ -91,13 +91,9 @@ const VideoUpload: FC<VideoUploadProps> = (): JSX.Element => {
         throw new Error('업로드 실패');
       }
       const result = await res.json()
-
       useAnalysisStore.getState().setResult(result)
       alert("업로드 및 분석이 완료되었습니다.")
       router.push('/result')
-      console.log("전체",result)
-      console.log("반환값에 전체",result.analysis)
-      console.log("영상",result.video_url)
 
 
     } catch (err) {

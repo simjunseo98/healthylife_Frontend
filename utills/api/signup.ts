@@ -7,7 +7,7 @@ export const signup = async (email: string,username: string, password: string, p
   if (username.length < 2) throw new Error('이름은 2자 이상이어야 합니다.')
   if (password !== password2) throw new Error('비밀번호가 일치하지 않습니다.')
 
-  const res = await fetch('http://13.125.241.160:8000/users/signup/', {
+  const res = await fetch('http://127.0.0.1:8000/users/signup/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email,username,password ,password2}),

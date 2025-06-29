@@ -2,23 +2,18 @@
 import React, { FC } from 'react'
 import { useAnalysisStore } from '@/store/useVideoStore'
 import { useRouter } from 'next/router'
+
 const AnalysisResult: FC = () => {
   const result = useAnalysisStore((state) => state.result)
   const router = useRouter()
-  if (!result?.analysis) return null
-  if (!result) return null
 
-  const { score, feedback,problem_joints } = result.analysis
+  if (!result?.analysis || !result) return null
+
+  const { score, feedback, problem_joints } = result.analysis
   const feedbackList = feedback
     .split(/[.]\s*|\n+/)
     .map((f) => f.trim())
     .filter((f) => f.length > 0)
-  
-  // const problem_jointList = problem_joints
-  //   .split(/[.]\s*|\n+/)
-  //   .map((f) => f.trim())
-  //   .filter((f) => f.length > 0)
-
 
   return (
     <div className="border-1 border-emerald-500 relative bg-white shadow-md rounded-lg p-4 w-full max-w-4xl mx-auto">
@@ -30,18 +25,16 @@ const AnalysisResult: FC = () => {
       </div>
 
       <div className='w-full h-auto mx-auto'>
-        <video 
-        controls
-        className='w-full h-auto rounded-lg '
-        src={result.video_url}
-        >
+        <video controls className='w-full h-auto rounded-lg'>
+          <source src={result.video_url} type="video/mp4" />
+          브라우저가 video 태그를 지원하지 않습니다.
         </video>
       </div>
 
       <div className="flex md:grid-cols-2 gap-6 mt-4">
         <div>
           {result.exercise_name} - {result.body_part}
-          <h1 className="text-5xl font-semibold mb-2 text-red-600">문제점:</h1>
+          <h1 className="text-5xl font-semibold mb-2 text-blue-600">피드백:</h1>
           <ul className="space-y-1 text-sm break-words">
             {feedbackList.map((item, idx) => (
               <li key={idx} className="flex items-start gap-2">
@@ -53,27 +46,14 @@ const AnalysisResult: FC = () => {
         </div>
       </div>
 
-      {/* <div className="flex md:grid-cols-2 gap-6 mt-4">
-        <div>
-          <h1 className="text-5xl font-semibold mb-2 text-red-600">문제관절:</h1>
-          <ul className="space-y-1 text-sm break-words">
-            {problem_jointList.map((item, idx) => (
-              <li key={idx} className="flex items-start gap-2">
-                <span className="mt-[6px] w-2 h-2 rounded-full bg-red-500" />
-                <span className="text-gray-700 text-2xl">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div> */}
-           <div className="mt-6 flex gap-4">
+      <div className="mt-6 flex gap-4">
         <button
           onClick={() => router.back()}
           className="px-4 py-2 rounded-md text-white bg-emerald-500 hover:bg-sky-400 transition"
         >
           ← 이전으로
         </button>
-        </div>
+      </div>
     </div>
   )
 }
