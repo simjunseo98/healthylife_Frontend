@@ -1,40 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 💚 Healthylife 2 – AI 기반 건강 분석 서비스
 
-## Getting Started
+사용자 맞춤형 설문 및 운동 영상 데이터를 분석하여 자세 교정 피드백과 질병 예측 결과를 함께 제공하는 AI 기반 건강 분석 서비스입니다.
 
-First, run the development server:
+![Healthylife2 Logo](https://your-image-url.com) <!-- 이미지 주소는 직접 업로드 후 변경 -->
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📌 프로젝트 개요
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- **기간:** 2024.06 ~ 2025.06  
+- **목표:**  
+  운동 데이터를 정량화하고, 사용자 맞춤형 피드백을 자동 제공하여 자세 개선에 도움
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- **핵심 기능:**
+  - 운동 영상 기반 자세 분석 및 자연어 피드백
+  - 사용자 설문 기반 질병 예측
+  - GPT API 연동 자연어 피드백 제공
+  - 추천 근거 제시를 위한 RAG 기반 문서 생성 시스템 *(진행 중)*
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+- **팀원**
+  - 🧠 **박두환**: Backend & AI 분석 전반 담당  
+  - 🎨 **심준서**: Frontend UI 및 분석 결과 시각화 담당
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ⚙️ 기술 스택
 
-To learn more about Next.js, take a look at the following resources:
+| 구분              | 기술                                                         |
+|-------------------|--------------------------------------------------------------|
+| **Frontend**       | Next.js, React, Tailwind CSS                                 |
+| **Backend**        | Django (Python), REST API                                   |
+| **AI 분석**        | MediaPipe, OpenAI GPT-4 API                                 |
+| **영상 처리**      | MoviePy (영상포맷변환), OpenCV (프레임 분석)               |
+| **관절 예측 모델** | scikit-learn (RandomForest 등), Pandas                      |
+| **RAG 생성 시스템**| GPT + LangChain 기반 구축 예정                              |
+| **DB**             | SQLite                                                      |
+| **배포**           | AWS EC2 (Backend), S3 + CloudFront (Frontend)              |
+| **협업 도구**      | Git, GitHub                                                 |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✅ 주요 기능 구현
 
-## Deploy on Vercel
+### 1. 사용자 관리 및 분석 기능
+- Django 기반 회원가입/로그인, JWT 인증
+- 사용자별 분석 결과 리스트 조회 API
+- 질병 예측 결과 조회 API
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+### 2. 운동 자세 분석 파이프라인
+
+#### 1) 영상 업로드 및 변환 (MoviePy)
+- 사용자가 업로드한 영상을 내부 처리 형식(MP4 등)으로 변환하여 저장합니다.
+
+#### 2) 프레임 추출 및 저장 (OpenCV)
+- 영상을 프레임 단위로 분해하고, 분석용 프레임 데이터를 `posepoints`로 저장하여 추후 재분석 및 모델 개선에 활용합니다.
+
+#### 3) 관절 좌표 추출 (MediaPipe)
+- 각 프레임에서 사용자 주요 관절 좌표를 추출합니다.
+
+#### 4) GPT 분석 응답 (GPT-4 API)
+- 관절 포인트를 기반으로 구성된 프로프트를 GPT에 전달하여:
+  - **자세 요약**
+  - **자연어 피드백**
+  - **수정 제안** 등을 생성합니다.
+
+#### 5) 시각화 영상 생성 (OpenCV)
+- 추출된 관절 좌표를 영상에 빨간 점으로 표시하여, 사용자가 문제 부위를 시각적으로 확인할 수 있도록 가공합니다.
+
+#### 6) 결과 저장
+- GPT 피드백, 점수, 시각화된 영상은 사용자별로 저장되며, 이후 페이지에서 조회 가능합니다.
+
+---
+
+### 3. 설문 기반 질병 예측 시스템
+- 건강 관련 설문 데이터 → 전처리 → 머신러닝 모델(Random Forest) 예측
+- 현재는 머신러닝 → **RAG 기반 문서 교체 중**
+
+---
+
+## 📁 폴더 구성 (예시)
