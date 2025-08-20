@@ -69,4 +69,6 @@
 ---
 
 ### 3. 주요 UI & 흐름도
-
+<img width="1220" height="534" alt="Image" src="https://github.com/user-attachments/assets/e6bff461-d5b4-4584-b079-db1eaee441aa" />
+|---|
+<img width="1271" height="555" alt="Image" src="https://github.com/user-attachments/assets/c948f10b-b082-4def-a411-59151d552afc" />
