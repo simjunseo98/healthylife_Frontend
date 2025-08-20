@@ -35,6 +35,7 @@
 
 ---
 
+
 ## ✅ 주요 기능 구현
 
 ### 1. 사용자 관리 및 분석 기능
@@ -42,6 +43,7 @@
 - 사용자별 분석 결과 리스트 조회 API
 
 ---
+
 
 ### 2. 운동 자세 분석 파이프라인
 
@@ -68,7 +70,10 @@
 
 ---
 
+
 ### 3. 주요 UI & 흐름도
-<img width="1220" height="534" alt="Image" src="https://github.com/user-attachments/assets/e6bff461-d5b4-4584-b079-db1eaee441aa" />
-|---|
+<img width="1220" height="534" alt="Image" src="https://github.com/user-attachments/assets/e6bff461-d5b4-4584-b079-db1eaee441aa" />0
+
+---
+
 <img width="1271" height="555" alt="Image" src="https://github.com/user-attachments/assets/c948f10b-b082-4def-a411-59151d552afc" />
